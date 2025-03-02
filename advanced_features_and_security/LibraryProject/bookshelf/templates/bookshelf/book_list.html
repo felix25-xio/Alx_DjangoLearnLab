@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Book List</h1>
+
+    <!-- Search Form -->
+    <form method="get" action="{% url 'bookshelf:book_list' %}">
+        <input type="text" name="q" placeholder="Search by title or author" value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Book List -->
+    <ul>
+        {% for book in books %}
+            <li>
+                <h3>{{ book.title }}</h3>
+                <p>Author: {{ book.author }}</p>
+                <p>Publication Year: {{ book.publication_year }}</p>
+                <a href="{% url 'bookshelf:book_detail' book.pk %}">View Details</a>
+            </li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
