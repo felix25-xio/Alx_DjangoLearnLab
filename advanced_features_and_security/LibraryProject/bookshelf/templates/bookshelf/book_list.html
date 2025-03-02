@@ -1,25 +1,19 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <h1>Book List</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-    <!-- Search Form -->
-    <form method="get" action="{% url 'bookshelf:book_list' %}">
-        <input type="text" name="q" placeholder="Search by title or author" value="{{ request.GET.q }}">
-        <button type="submit">Search</button>
-    </form>
+<body>
+    <h1>Hello here are the books.</h1>
+    {% for book in books %}
+    <p>{{book.title}} by {{book.author}}</p>
 
-    <!-- Book List -->
-    <ul>
-        {% for book in books %}
-            <li>
-                <h3>{{ book.title }}</h3>
-                <p>Author: {{ book.author }}</p>
-                <p>Publication Year: {{ book.publication_year }}</p>
-                <a href="{% url 'bookshelf:book_detail' book.pk %}">View Details</a>
-            </li>
-        {% empty %}
-            <li>No books found.</li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+    {% endfor %}
+
+</body>
+
+</html>
